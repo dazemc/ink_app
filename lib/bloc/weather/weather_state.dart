@@ -1,18 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-abstract class HomeState extends Equatable {
+abstract class WeatherState extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class HomeInitial extends HomeState {}
+class WeatherInitial extends WeatherState {}
 
-class HomeLoading extends HomeState {}
+class UpdatingWeather extends WeatherState {}
 
-class HomeLoaded extends HomeState {}
+class UpdatingWeatherLoaded extends WeatherState {}
 
-class UpdatingWeather extends HomeState {}
-
-class UpdatingWeatherLoaded extends HomeState {}
-
-class UpdatingWeatherError extends HomeState {}
+class UpdatingWeatherError extends WeatherState {}

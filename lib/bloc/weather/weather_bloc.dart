@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ink_app/bloc/weather/weather_event.dart';
 import 'package:ink_app/bloc/weather/weather_state.dart';
-import '../../services/update_weather.dart';
+import '../../services/api_service.dart';
 
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
+class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final WeatherUpdate weatherUpdateService;
 
-  HomeBloc(this.weatherUpdateService) : super(HomeInitial()) {
-    print('HomeBloc loaded');
+  WeatherBloc(this.weatherUpdateService) : super(WeatherInitial()) {
+    print('WeatherBloc loaded');
     on<UpdateWeather>((event, emit) async {
       emit(UpdatingWeather());
       try {
@@ -23,7 +23,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
 
     on<WeatherExit>((event, emit) async {
-      emit(HomeLoaded());
     });
 
   }

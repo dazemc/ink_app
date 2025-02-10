@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-abstract class HomeEvent extends Equatable {
-  const HomeEvent();
+abstract class WeatherEvent extends Equatable {
+  const WeatherEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class UpdateWeather extends HomeEvent {}
+class UpdateWeather extends WeatherEvent {}
 
-class WeatherNotify extends HomeEvent {}
+class WeatherNotify extends WeatherEvent {}
 
-class WeatherExit extends HomeEvent {}
+class WeatherExit extends WeatherEvent {}

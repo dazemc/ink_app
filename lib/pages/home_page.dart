@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ink_app/bloc/home/home_bloc.dart';
+import 'package:ink_app/bloc/home/home_state.dart';
+import 'package:ink_app/bloc/image_upload/upload_bloc.dart';
+import 'package:ink_app/bloc/image_upload/upload_event.dart';
 import 'package:ink_app/bloc/weather/weather_bloc.dart';
 import 'package:ink_app/bloc/weather/weather_event.dart';
 import 'package:ink_app/bloc/weather/weather_state.dart';
@@ -9,20 +13,33 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          if (state is HomeInitial) {
+      body: Builder(
+        builder: (context) {
+          final stateHome = context.watch<HomeBloc>().state;
+          final stateWeather = context.watch<WeatherBloc>().state;
+          final stateUpload = context.watch<UploadBloc>().state;
+          if (stateHome is HomeInitial) {
             print('Home is in initial state');
             return Center(
-              child: FloatingActionButton(
-                child: Icon(Icons.cloudy_snowing),
-                  onPressed: () =>
-                      {BlocProvider.of<HomeBloc>(context).add(UpdateWeather())}),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FloatingActionButton(
+                    child: Icon(Icons.cloudy_snowing),
+                      onPressed: () =>
+                          {BlocProvider.of<WeatherBloc>(context).add(UpdateWeather())}),
+                  SizedBox(width: 20,),
+                  FloatingActionButton(child: Icon(Icons.image),
+                  onPressed: () => {
+                    BlocProvider.of<UploadBloc>(context).add(UploadImage())
+                  }),
+                ],
+              ),
             );
-          } else if (state is HomeLoading) {
+          } else if (stateHome is HomeLoading) {
             return Center(child: CircularProgressIndicator());
           }
-          else if (state is UpdatingWeather) {
+          else if (stateWeather is UpdatingWeather) {
             return Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,15 +51,18 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             );
-          } else if (state is UpdatingWeatherLoaded) {
+          } else if (stateWeather is UpdatingWeatherLoaded) {
 
             // TODO: Learn notifcations and send one.
 
-            BlocProvider.of<HomeBloc>(context).add(WeatherExit());
-          } else if (state is HomeLoaded) {
+            BlocProvider.of<WeatherBloc>(context).add(WeatherExit());
+          } else if (stateHome is HomeLoaded) {
             return Center(child: Text('Done.'),);
           }
-          print("UNHANDLED STATE: $state");
+          print("UNHANDLED STATE:\n");
+          print('HOME: $stateHome');
+          print('WEATHER: $stateWeather');
+          print('UPLOAD: $stateUpload');
           return Placeholder();
         },
       ),
