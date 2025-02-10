@@ -4,6 +4,7 @@ import 'package:ink_app/bloc/home/home_bloc.dart';
 import 'package:ink_app/bloc/home/home_state.dart';
 import 'package:ink_app/bloc/image_upload/upload_bloc.dart';
 import 'package:ink_app/bloc/image_upload/upload_event.dart';
+import 'package:ink_app/bloc/image_upload/upload_state.dart';
 import 'package:ink_app/bloc/weather/weather_bloc.dart';
 import 'package:ink_app/bloc/weather/weather_event.dart';
 import 'package:ink_app/bloc/weather/weather_state.dart';
@@ -25,39 +26,37 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FloatingActionButton(
-                    child: Icon(Icons.cloudy_snowing),
-                      onPressed: () =>
-                          {BlocProvider.of<WeatherBloc>(context).add(UpdateWeather())}),
-                  SizedBox(width: 20,),
-                  FloatingActionButton(child: Icon(Icons.image),
-                  onPressed: () => {
-                    BlocProvider.of<UploadBloc>(context).add(UploadImage())
-                  }),
+                      child: (stateWeather is UpdatingWeather)
+                          ? CircularProgressIndicator()
+                          : Icon(Icons.cloudy_snowing),
+                      onPressed: () => {
+                            BlocProvider.of<WeatherBloc>(context)
+                                .add(UpdateWeather())
+                          }),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  FloatingActionButton(
+                      child: (stateUpload is UploadLoading)
+                      ? CircularProgressIndicator()
+                      : Icon(Icons.image),
+                      onPressed: () => {
+                            BlocProvider.of<UploadBloc>(context)
+                                .add(UploadImage())
+                          }),
                 ],
               ),
             );
           } else if (stateHome is HomeLoading) {
             return Center(child: CircularProgressIndicator());
-          }
-          else if (stateWeather is UpdatingWeather) {
-            return Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('Updating weather forecast...'),
-                  SizedBox(height: 12,),
-                  CircularProgressIndicator(),
-                ],
-              ),
-            );
           } else if (stateWeather is UpdatingWeatherLoaded) {
-
             // TODO: Learn notifcations and send one.
 
             BlocProvider.of<WeatherBloc>(context).add(WeatherExit());
           } else if (stateHome is HomeLoaded) {
-            return Center(child: Text('Done.'),);
+            return Center(
+              child: Text('Done.'),
+            );
           }
           print("UNHANDLED STATE:\n");
           print('HOME: $stateHome');

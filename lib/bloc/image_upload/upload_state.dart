@@ -6,3 +6,7 @@ class UploadState extends Equatable{
 }
 
 class UploadInitial extends UploadState {}
+
+class UploadLoading extends UploadState {}
+
+class UploadLoaded extends UploadState {}

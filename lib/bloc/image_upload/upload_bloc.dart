@@ -8,7 +8,9 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
 
   UploadBloc(this.uploadImageService) : super(UploadInitial()) {
     on<UploadImage>((event, emit) async {
+      emit(UploadLoading());
       await uploadImageService.uploadImage();
+      emit(UploadLoaded());
     });
   }
 }
