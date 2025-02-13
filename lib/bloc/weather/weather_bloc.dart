@@ -1,13 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ink_app/bloc/weather/weather_event.dart';
-import 'package:ink_app/bloc/weather/weather_state.dart';
+import 'package:equatable/equatable.dart';
 import '../../services/api_service.dart';
+
+part 'weather_event.dart';
+part 'weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final WeatherUpdate weatherUpdateService;
 
   WeatherBloc(this.weatherUpdateService) : super(WeatherInitial()) {
-    print('WeatherBloc loaded');
     on<UpdateWeather>((event, emit) async {
       emit(UpdatingWeather());
       try {

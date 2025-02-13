@@ -1,8 +1,8 @@
-import 'package:equatable/equatable.dart';
+part of 'upload_bloc.dart';
 
-class UploadEvent extends Equatable{
+sealed class UploadEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
 
-class UploadImage extends UploadEvent {} 
+class UploadImage extends UploadEvent {}

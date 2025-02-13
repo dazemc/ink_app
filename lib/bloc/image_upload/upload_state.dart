@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+part of 'upload_bloc.dart';
 
-class UploadState extends Equatable{
+sealed class UploadState extends Equatable {
   @override
   List<Object?> get props => [];
 }

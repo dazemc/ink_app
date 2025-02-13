@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ink_app/bloc/image_upload/upload_event.dart';
-import 'package:ink_app/bloc/image_upload/upload_state.dart';
+import 'package:equatable/equatable.dart';
 import 'package:ink_app/services/api_service.dart';
+
+part 'upload_event.dart';
+part 'upload_state.dart';
 
 class UploadBloc extends Bloc<UploadEvent, UploadState> {
   final DisplayUploadImage uploadImageService;

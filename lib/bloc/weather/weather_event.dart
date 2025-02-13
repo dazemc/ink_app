@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+part of 'weather_bloc.dart';
 
-abstract class WeatherEvent extends Equatable {
+sealed class WeatherEvent extends Equatable {
   const WeatherEvent();
 
   @override

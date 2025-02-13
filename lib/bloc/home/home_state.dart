@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+part of 'home_bloc.dart';
 
-abstract class HomeState extends Equatable {
+sealed class HomeState extends Equatable {
   @override
   List<Object?> get props => [];
 }

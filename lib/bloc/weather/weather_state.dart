@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+part of 'weather_bloc.dart';
 
-abstract class WeatherState extends Equatable {
+sealed class WeatherState extends Equatable {
   @override
   List<Object?> get props => [];
 }
