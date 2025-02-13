@@ -10,21 +10,23 @@ class QrBloc extends Bloc<QrEvent, QrState> {
 
   QrBloc(this.qrCodeService) : super(QrInitial()) {
     on<QrWifi>((event, emit) async {
-      emit(QrUpdating());
+      emit(QrUpdatingWifi());
       try {
         await qrCodeService.wifiQR();
       } catch (e) {
         emit(QrError());
       }
+      emit(QrUpdated());
     });
 
     on<QrSSH>((event, emit) async {
-      emit(QrUpdating());
+      emit(QrUpdatingSSH());
       try {
         await qrCodeService.sshQR();
       } catch (e) {
         emit(QrError());
       }
+      emit(QrUpdated());
     });
   }
 }

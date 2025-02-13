@@ -9,7 +9,9 @@ sealed class QrState extends Equatable {
 
 final class QrInitial extends QrState {}
 
-final class QrUpdating extends QrState {}
+final class QrUpdatingSSH extends QrState {}
+
+final class QrUpdatingWifi extends QrState {}
 
 final class QrUpdated extends QrState {}
 
