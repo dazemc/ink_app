@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ink_app/bloc/home/home_bloc.dart';
 import 'package:ink_app/bloc/image_upload/upload_bloc.dart';
 import 'package:ink_app/bloc/qr/qr_bloc.dart';
+import 'package:ink_app/bloc/quote/quote_bloc.dart';
 import 'package:ink_app/bloc/weather/weather_bloc.dart';
 
 class HomePage extends StatelessWidget {
@@ -23,11 +24,7 @@ class HomePage extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: <Color>[
-                    Colors.black,
-                    Colors.grey,
-                    Colors.black,
-                  ],
+                  colors: <Color>[Colors.black, Colors.grey, Colors.black],
                 ),
               ),
               child: Center(
@@ -35,34 +32,56 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     FloatingActionButton(
-                        child: (stateWeather is UpdatingWeather)
-                            ? CircularProgressIndicator()
-                            : Icon(Icons.cloudy_snowing),
-                        onPressed: () => {
-                              BlocProvider.of<WeatherBloc>(context)
-                                  .add(UpdateWeather())
-                            }),
+                      child:
+                          (stateWeather is UpdatingWeather)
+                              ? CircularProgressIndicator()
+                              : Icon(Icons.cloudy_snowing),
+                      onPressed:
+                          () => {
+                            BlocProvider.of<WeatherBloc>(
+                              context,
+                            ).add(UpdateWeather()),
+                          },
+                    ),
                     FloatingActionButton(
-                        child: (stateUpload is UploadLoading)
-                            ? CircularProgressIndicator()
-                            : Icon(Icons.image),
-                        onPressed: () => {
-                              BlocProvider.of<UploadBloc>(context)
-                                  .add(UploadImage())
-                            }),
+                      child:
+                          (stateUpload is UploadLoading)
+                              ? CircularProgressIndicator()
+                              : Icon(Icons.image),
+                      onPressed:
+                          () => {
+                            BlocProvider.of<UploadBloc>(
+                              context,
+                            ).add(UploadImage()),
+                          },
+                    ),
                     FloatingActionButton(
-                        child: (stateQR is QrUpdatingWifi)
-                            ? CircularProgressIndicator()
-                            : Icon(Icons.wifi),
-                        onPressed: () =>
-                            {BlocProvider.of<QrBloc>(context).add(QrWifi())}),
+                      child:
+                          (stateQR is QrUpdatingWifi)
+                              ? CircularProgressIndicator()
+                              : Icon(Icons.wifi),
+                      onPressed:
+                          () => {
+                            BlocProvider.of<QrBloc>(context).add(QrWifi()),
+                          },
+                    ),
                     FloatingActionButton(
-                        child: (stateQR is QrUpdatingSSH)
-                            ? CircularProgressIndicator()
-                            : Icon(Icons.password),
-                        onPressed: () => {
-                              BlocProvider.of<QrBloc>(context).add(QrSSH()),
-                            }),
+                      child:
+                          (stateQR is QrUpdatingSSH)
+                              ? CircularProgressIndicator()
+                              : Icon(Icons.password),
+                      onPressed:
+                          () => {BlocProvider.of<QrBloc>(context).add(QrSSH())},
+                    ),
+                    FloatingActionButton(
+                      child: Icon(Icons.text_snippet),
+                      onPressed:
+                          () => {
+                            BlocProvider.of<QuoteBloc>(
+                              context,
+                            ).add(QuoteUpdate()),
+                          },
+                    ),
                   ],
                 ),
               ),
@@ -74,9 +93,7 @@ class HomePage extends StatelessWidget {
 
             BlocProvider.of<WeatherBloc>(context).add(WeatherExit());
           } else if (stateHome is HomeLoaded) {
-            return Center(
-              child: Text('Done.'),
-            );
+            return Center(child: Text('Done.'));
           }
           print("UNHANDLED STATE:\n");
           print('HOME: $stateHome');

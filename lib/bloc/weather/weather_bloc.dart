@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../services/api_service.dart';
@@ -11,6 +12,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   WeatherBloc(this.weatherUpdateService) : super(WeatherInitial()) {
     on<UpdateWeather>((event, emit) async {
       emit(UpdatingWeather());
+      HapticFeedback.vibrate();
       try {
         await weatherUpdateService.updateWeather();
       } catch (e) {
@@ -23,9 +25,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       emit(UpdatingWeatherLoaded());
     });
 
-    on<WeatherExit>((event, emit) async {
-    });
-
+    on<WeatherExit>((event, emit) async {});
   }
-
 }

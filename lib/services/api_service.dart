@@ -18,8 +18,9 @@ class DisplayUploadImage {
   late String imagePath;
 
   Future<void> getImagePicker() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
     imagePath = pickedFile!.path;
   }
 
