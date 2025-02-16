@@ -15,22 +15,26 @@ class WeatherUpdate {
 
 class DisplayUploadImage {
   static final url = Uri.parse('$serverURL/upload_image');
-  late String imagePath;
 
-  Future<void> getImagePicker() async {
+  Future<String?> getImagePicker() async {
     final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
     );
-    imagePath = pickedFile!.path;
+    return (pickedFile != null) ? pickedFile.path : null;
   }
 
   Future<void> uploadImage() async {
-    await getImagePicker();
-    final request = http.MultipartRequest('POST', url);
-    final multipartFile = await http.MultipartFile.fromPath('file', imagePath);
-    request.files.add(multipartFile);
-    final response = await request.send();
-    print('Image upload attempted: $response');
+    final imagePath = await getImagePicker();
+    if (imagePath != null) {
+      final request = http.MultipartRequest('POST', url);
+      final multipartFile = await http.MultipartFile.fromPath(
+        'file',
+        imagePath,
+      );
+      request.files.add(multipartFile);
+      final response = await request.send();
+      print('Image upload attempted: $response');
+    }
   }
 }
 
@@ -46,6 +50,16 @@ class QrCode {
 
   Future<void> sshQR() async {
     final response = await http.get(urlSSH);
+    final json = jsonDecode(response.body);
+    print(json);
+  }
+}
+
+class Quote {
+  static final url = Uri.parse('$serverURL/quote');
+
+  Future<void> quoteDisplay() async {
+    final response = await http.get(url);
     final json = jsonDecode(response.body);
     print(json);
   }

@@ -6,6 +6,8 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
-    on<HomeReady>((event, emit) async {});
+    on<HomeWait>((event, emit) async {
+      emit(HomeLoading());
+    });
   }
 }

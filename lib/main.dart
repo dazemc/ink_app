@@ -20,7 +20,7 @@ void main() {
           create: (BuildContext context) => UploadBloc(DisplayUploadImage()),
         ),
         BlocProvider(create: (BuildContext context) => QrBloc(QrCode())),
-        BlocProvider(create: (BuildContext context) => QuoteBloc()),
+        BlocProvider(create: (BuildContext context) => QuoteBloc(Quote())),
       ],
       child: MaterialApp(
         // theme: ThemeData(

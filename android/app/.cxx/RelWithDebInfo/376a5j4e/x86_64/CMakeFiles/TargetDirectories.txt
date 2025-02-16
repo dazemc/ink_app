@@ -1,0 +1,2 @@
+C:/Users/Administrator/Documents/git/ink_app/android/app/.cxx/RelWithDebInfo/376a5j4e/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Administrator/Documents/git/ink_app/android/app/.cxx/RelWithDebInfo/376a5j4e/x86_64/CMakeFiles/rebuild_cache.dir
