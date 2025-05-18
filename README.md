@@ -1,16 +1,23 @@
-# ink_app
+# E-Ink Display Controller
 
-A new Flutter project.
+A Flutter app for controlling an E-Paper device, paired with a [FastAPI E-Ink Display Server](https://github.com/dazemc/ink_manager). Built with BLoC architecture, it enables users to display images, text, weather, quotes, and QR codes on an e-ink display (e.g., Raspberry Pi with Waveshare e-Paper).
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Home**: Central dashboard for device status and navigation.
+- **Image Upload**: Upload images to the server for display on the e-ink screen.
+- **QR**: Generate and display QR codes for Wi-Fi credentials or SSH access.
+- **Quote**: Fetch and show daily inspirational quotes via the ZenQuotes API.
+- **Weather**: Display real-time weather forecasts using OpenWeatherMap API data.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshot
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![E-Ink Display Controller UI](assets/screenshots/app_screenshot.png)
+<br>
+*Screenshot of the app’s main interface, showcasing the home dashboard and controls.*
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Tech Stack
+
+- **Flutter**: Cross-platform mobile and web UI.
+- **BLoC**: State management for reactive UI updates.
+- **FastAPI Backend**: RESTful API for e-ink display control (see [E-Ink Display Server](https://github.com/dazemc/ink_manager)).
